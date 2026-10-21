@@ -1,0 +1,42 @@
+Use your built-in image generation tool to create three logo images for a product called HEIMDALL and save them as PNG files in the current directory. Do not draw them with code, SVG, or any other tool, and do not download anything.
+
+PRODUCT
+HEIMDALL watches every office's network link and raises an alert when one fails. The name comes from the Norse god who watches over the Bifrost and sees and hears across all realms.
+
+ORIGINALITY
+The guardian is a completely ORIGINAL character. It may evoke the idea of a golden Norse sentinel guarding a rainbow bridge, but it must not copy or resemble any existing logo, character design, film, comic or game artwork. It must NOT look like Marvel's Heimdall or the MCU Heimdall, must NOT resemble Idris Elba or any real person, and must not use Marvel styling. Different helmet, different armour shapes: no ring-shaped or crescent horns on the helmet, no wide curved side horns, no eye slit with glowing eyes, no ornate filigree. No runes, no Norse symbols, no existing brand glyph.
+
+THE SUBJECT (the mark)
+A chunky, heroic, original golden armoured guardian standing on a short rainbow bridge, filling the frame.
+- Pose: seen straight from the front, centred, stern and still, feet apart, broad shoulders, stocky heroic proportions (big chest, short sturdy legs, slightly large head, cartoon friendly).
+- Sword: a long straight sword planted point-down at his feet in the exact centre, the blade running vertically down between his legs to the bridge deck. The hilt is at chest height: a simple straight crossguard and a round pommel. BOTH of his gloved hands rest one on top of the other on the pommel. Blade in light steel (#D9DEE3, one shade #B3BAC2), crossguard and pommel in gold.
+- Armour: bright gold plate armour (#F2B632, one shade #C98A1B): a broad rounded breastplate with one simple horizontal ridge, big rounded pauldrons on each shoulder made of two stacked plates, plain gold bracers, chunky gold gauntlets, gold greaves and boots. Shapes are simple, rounded and blocky, with no engraving.
+- Tunic and cape: under the armour a deep maroon tunic (#7A1F2B, one shade #5C1520) shows as a skirt below the breastplate down to the knees. A deep maroon cape hangs from behind both shoulders and is visible on both sides of his body, falling to the bridge deck.
+- Helmet: a CLOSED gold helmet of original design, rounded at the top like a tall rounded bucket, with a plain T-shaped opening at the front. The face opening is filled only with solid dark shadow (#3A2414): no eyes, no glow, no nose, no mouth, no skin, no beard, NO facial features at all. On top of the helmet, two short straight crest blades sweep up and slightly outward from the crown like a small V, short and pointed, gold. They are NOT horns, NOT rings, NOT crescents, and they do not curve sideways.
+- Bridge: he stands on a short, slightly arched bridge seen from the front, wider than the guardian, forming the base of the composition. The front face of the bridge deck is made of horizontal rainbow bands, top to bottom: red #E04A3A, orange #F28C28, yellow #F7D046, green #4CAF6A, blue #3A7BD5, violet #7B4FB8, each band outlined in #3A2414.
+- Office dots: along the top front edge of the deck, a neat row of 6 small round glowing dots, evenly spaced from left to right across the bridge, joined by a thin dark line like a network. Five dots are warm cream (#FDF3E1) with a tiny cream glow ring. One dot (the fifth from the left) is bright alert red (#E04A3A) with a small flat red glow ring, meaning that office's link has failed.
+- Every shape has a bold dark brown outline (#3A2414) of even, chunky weight.
+- The composition is compact and reads as one shape, roughly square, centred.
+
+PALETTE (hex)
+- Outline: dark brown #3A2414
+- Warm cream: #FDF3E1
+- Icon rounded-square colour: deep navy #14213D
+- Subject colours only as needed: gold #F2B632 (shade #C98A1B), maroon #7A1F2B (shade #5C1520), steel #D9DEE3 (shade #B3BAC2), rainbow bands #E04A3A #F28C28 #F7D046 #4CAF6A #3A7BD5 #7B4FB8, alert red #E04A3A.
+- No other colours.
+
+MOOD AND STYLE
+Friendly flat 2D cartoon, the same family as the ALLSPARK logo set: bold dark brown outlines (#3A2414), cel shading with at most one shade per colour, clean chunky shapes. Flat vector style, no gradients, no textures, no 3D, no photorealism, no drop shadows beyond one flat cel shade. Bold, simple shapes that remain readable at 32 px.
+
+RULES
+1. No text, letters, numbers, runes or glyphs anywhere in the mark or the icon. Only the wordmark carries letters.
+2. The wordmark spells exactly HEIMDALL (eight capital letters: H E I M D A L L), nothing else.
+3. Plain solid white (#FFFFFF) background on heimdall-mark.png and heimdall-wordmark.png. On heimdall-icon.png, the area outside the rounded square is plain solid white.
+4. Small sizes first: flat vector style, bold clean shapes, at most one soft shade, readable at 32 px.
+
+FILES TO CREATE (exact names, lower-case)
+1. heimdall-mark.png: the symbol alone (the full golden guardian with both hands on the sword pommel, standing on the rainbow bridge with the row of 6 dots, one red), square 1:1 (1024x1024), centred on plain white, with a generous margin (about 12% of the canvas on each side).
+2. heimdall-icon.png: the simplest form of the symbol inside a rounded square filled with deep navy #14213D, square 1:1 (1024x1024). Show ONLY the helmeted head and the sword hilt: the closed gold helmet with its two short upswept crest blades and the dark T-shaped face shadow (no features), large and centred in the upper part, and below it the gold sword hilt (round pommel, grip and straight crossguard) with a short stub of blade, big and bold. No body, no hands, no cape, no bridge, no dots. Keep the #3A2414 outlines. The rounded square fills almost the whole canvas with a small white margin. No text.
+3. heimdall-wordmark.png: landscape 3:1 (1536x512), plain white background. The mark on the left (same design as heimdall-mark.png, the full guardian on the bridge), scaled so the guardian is as tall as the letters, and on the right the word HEIMDALL in a clean, bold, geometric sans-serif, all capitals, in dark brown #3A2414, vertically centred with the mark. Spell it exactly HEIMDALL.
+
+After saving, list the files with their sizes.
