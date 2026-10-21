@@ -1,0 +1,23 @@
+<div class="grid gap-6 lg:grid-cols-2">
+  <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="res-title">
+    <h2 id="res-title" class="font-display text-base font-semibold">CPU and memory use</h2>
+    <p class="text-sm text-slate-500">Hourly average over the last 24 hours.</p>
+    <div class="relative mt-4 h-64">
+      <canvas role="img" aria-label="Line chart of PC-05 CPU and memory use, last day"
+              data-chart="line" data-unit="%" data-max="100"
+              data-labels='["11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00"]'
+              data-datasets='[{"label":"CPU","data":[88,90,95,95,90,87,95,95,95,92,95,95,87,94,95,95,88,82,90,88,84,87,83,81],"color":"indigo","fill":true},{"label":"Memory","data":[78,76,79,80,77,75,72,72,73,73,71,71,73,70,67,67,66,66,67,66,67,67,64,61],"color":"teal"}]'></canvas>
+    </div>
+  </section>
+
+  <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="net-title">
+    <h2 id="net-title" class="font-display text-base font-semibold">Network traffic</h2>
+    <p class="text-sm text-slate-500">Hourly average over the last 24 hours.</p>
+    <div class="relative mt-4 h-64">
+      <canvas role="img" aria-label="Line chart of PC-05 download and upload traffic, last day"
+              data-chart="line" data-unit=" Mbps"
+              data-labels='["11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00"]'
+              data-datasets='[{"label":"Download","data":[53,52,46,54,47,38,45,39,35,34,33,33,36,31,21,22,22,18,9,5,2,2,2,6],"color":"sky","fill":true},{"label":"Upload","data":[19,18,19,20,23,24,21,24,26,24,23,25,23,21,23,25,22,25,23,22,19,16,18,15],"color":"amber"}]'></canvas>
+    </div>
+  </section>
+</div>

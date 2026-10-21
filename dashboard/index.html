@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heimdall | Admin dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 24C3 14 9 7 16 7s13 7 13 17' fill='none' stroke='%234F46E5' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <!-- Fonts: Sora for headings and numbers, Figtree for everything else -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS (Play CDN: no build step needed during development) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Sora', 'Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            ink: { DEFAULT: '#0F1B3D', 800: '#17254F', 700: '#22336B' },
+            canvas: '#F5F6FA'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Login guard: not signed in? Go to the login page. (Mock check, see js/auth.js) -->
+  <script src="js/auth.js"></script>
+  <script>
+    if (!HeimdallAuth.isLoggedIn()) { window.location.replace('login.html'); }
+  </script>
+</head>
+
+<!-- hx-indicator: every HTMX request shows the thin progress bar at the top -->
+<body class="h-full bg-canvas font-sans text-ink antialiased" hx-indicator="#page-loader">
+
+  <a href="#content" class="sr-only rounded-md bg-white px-3 py-2 text-sm font-medium focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50">Skip to content</a>
+
+  <!-- Top progress bar (shown by HTMX while a request is running) -->
+  <div id="page-loader" class="htmx-indicator fixed left-0 top-0 z-50 h-1 w-full" style="background: linear-gradient(90deg, #F472B6, #FBBF24, #34D399, #60A5FA)" aria-hidden="true"></div>
+
+  <!-- Mobile overlay -->
+  <div id="overlay" class="fixed inset-0 z-30 hidden bg-ink/50 lg:hidden" aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col bg-ink text-slate-300 transition-transform duration-200 lg:translate-x-0">
+    <div class="flex items-center gap-3 px-6 pt-7">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="bifrost" x1="0" y1="0" x2="32" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F472B6" />
+            <stop offset="0.35" stop-color="#FBBF24" />
+            <stop offset="0.65" stop-color="#34D399" />
+            <stop offset="1" stop-color="#60A5FA" />
+          </linearGradient>
+        </defs>
+        <path d="M3 24C3 14 9 7 16 7s13 7 13 17" stroke="url(#bifrost)" stroke-width="3.5" stroke-linecap="round" />
+        <path d="M3 28h26" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" opacity="0.45" />
+      </svg>
+      <div>
+        <p class="font-display text-lg font-semibold leading-tight text-white">Heimdall</p>
+        <p class="text-xs text-slate-400">Network monitoring</p>
+      </div>
+    </div>
+
+    <nav aria-label="Main" class="mt-9 space-y-1 px-3">
+      <a href="#" class="nav-link is-active" data-nav="overview" aria-current="page"
+         hx-get="pages/overview.html" hx-target="#content">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" />
+          <rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" />
+        </svg>
+        Overview
+      </a>
+      <a href="#" class="nav-link" data-nav="computers"
+         hx-get="pages/computers.html" hx-target="#content">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" />
+        </svg>
+        Computers
+      </a>
+      <a href="#" class="nav-link" data-nav="alerts"
+         hx-get="pages/alerts.html" hx-target="#content">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9a6 6 0 0112 0c0 5 2 6.5 2 6.5H4S6 14 6 9z" /><path d="M10 19a2 2 0 004 0" />
+        </svg>
+        Alerts
+        <!-- Number of active alerts. Refreshed by HTMX every 30 seconds.
+             hx-target="this" is needed: without it the span would inherit hx-target="#content" from the link. -->
+        <span id="alert-count" class="ml-auto rounded-full bg-rose-500/20 px-2 py-0.5 text-xs font-medium text-rose-200" title="Active alerts"
+              hx-get="partials/alert-count.html" hx-target="this" hx-trigger="load, every 30s" hx-indicator="this">5</span>
+      </a>
+    </nav>
+
+    <div class="mt-auto p-4">
+      <div class="flex gap-3 rounded-xl bg-white/5 p-4">
+        <svg class="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" /><path d="M9 12l2 2 4-4" />
+        </svg>
+        <p class="text-xs leading-relaxed text-slate-300">Only authorized computers are monitored, and only approved system and network metrics are shown.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main column -->
+  <div class="min-h-full lg:pl-64">
+    <header class="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-slate-200 bg-white/90 px-4 backdrop-blur sm:px-6 lg:px-8">
+      <button id="menu-btn" type="button" class="-ml-2 rounded-lg p-2 text-slate-600 hover:bg-slate-100 lg:hidden" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+
+      <p id="page-title" class="font-display text-base font-semibold">Overview</p>
+
+      <div class="ml-auto flex items-center gap-4">
+        <p class="hidden items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 sm:flex">
+          <span class="live-dot h-2 w-2 rounded-full bg-emerald-500"></span>
+          Live data
+        </p>
+        <button id="logout-btn" type="button" class="rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100">Sign out</button>
+        <span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white" title="Administrator" aria-label="Signed in as administrator">AD</span>
+      </div>
+    </header>
+
+    <!-- Pages are loaded here by HTMX. The skeleton shows until the first page arrives. -->
+    <main id="content" tabindex="-1" class="px-4 py-6 sm:px-6 lg:px-8" hx-get="pages/overview.html" hx-trigger="load">
+      <div class="mx-auto max-w-7xl animate-pulse space-y-6" aria-hidden="true">
+        <div class="h-8 w-48 rounded bg-slate-200"></div>
+        <div class="h-56 rounded-2xl bg-slate-200/70"></div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="h-72 rounded-xl bg-slate-200/70 lg:col-span-2"></div>
+          <div class="h-72 rounded-xl bg-slate-200/70"></div>
+        </div>
+      </div>
+      <p class="sr-only">Loading</p>
+    </main>
+  </div>
+
+  <!-- Toast for errors -->
+  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-4 right-4 z-50 max-w-sm translate-y-2 rounded-lg bg-ink px-4 py-3 text-sm text-white opacity-0 shadow-lg transition duration-200"></div>
+
+  <noscript>
+    <p class="p-6 text-center text-sm">This dashboard needs JavaScript to load its pages.</p>
+  </noscript>
+
+  <!-- Scripts: HTMX, Chart.js, then our own files (order matters) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/toggle-groups.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

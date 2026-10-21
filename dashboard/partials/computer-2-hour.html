@@ -1,0 +1,23 @@
+<div class="grid gap-6 lg:grid-cols-2">
+  <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="res-title">
+    <h2 id="res-title" class="font-display text-base font-semibold">CPU and memory use</h2>
+    <p class="text-sm text-slate-500">Readings every 5 minutes.</p>
+    <div class="relative mt-4 h-64">
+      <canvas role="img" aria-label="Line chart of PC-02 CPU and memory use, last hour"
+              data-chart="line" data-unit="%" data-max="100"
+              data-labels='["09:35","09:40","09:45","09:50","09:55","10:00","10:05","10:10","10:15","10:20","10:25","10:30"]'
+              data-datasets='[{"label":"CPU","data":[73,75,83,93,98,95,98,96,92,82,82,72],"color":"indigo","fill":true},{"label":"Memory","data":[64,64,66,67,65,62,61,61,63,65,68,65],"color":"teal"}]'></canvas>
+    </div>
+  </section>
+
+  <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="net-title">
+    <h2 id="net-title" class="font-display text-base font-semibold">Network traffic</h2>
+    <p class="text-sm text-slate-500">Readings every 5 minutes.</p>
+    <div class="relative mt-4 h-64">
+      <canvas role="img" aria-label="Line chart of PC-02 download and upload traffic, last hour"
+              data-chart="line" data-unit=" Mbps"
+              data-labels='["09:35","09:40","09:45","09:50","09:55","10:00","10:05","10:10","10:15","10:20","10:25","10:30"]'
+              data-datasets='[{"label":"Download","data":[43,40,37,32,33,34,36,34,33,29,34,41],"color":"sky","fill":true},{"label":"Upload","data":[13,15,14,12,10,13,15,14,16,15,17,12],"color":"amber"}]'></canvas>
+    </div>
+  </section>
+</div>

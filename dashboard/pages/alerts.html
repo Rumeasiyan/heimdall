@@ -1,0 +1,28 @@
+<div data-title="Alerts" class="mx-auto max-w-7xl space-y-6">
+  <div>
+    <h1 class="font-display text-2xl font-semibold tracking-tight">Alerts</h1>
+    <p class="mt-1 text-sm text-slate-500">Problems found on your authorized computers, newest first.</p>
+  </div>
+
+  <section class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6" aria-label="Alert summary">
+    <dl class="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
+      <div class=""><dt class="text-sm text-slate-500">Active alerts</dt><dd class="mt-1 font-display text-3xl font-semibold tabular-nums text-ink">5</dd><dd class="text-xs text-slate-500">Need attention</dd></div><div class="sm:border-l sm:border-slate-200 sm:pl-6"><dt class="text-sm text-slate-500">Critical</dt><dd class="mt-1 font-display text-3xl font-semibold tabular-nums text-rose-600">2</dd><dd class="text-xs text-slate-500">Computers offline</dd></div><div class="sm:border-l sm:border-slate-200 sm:pl-6"><dt class="text-sm text-slate-500">Warnings</dt><dd class="mt-1 font-display text-3xl font-semibold tabular-nums text-amber-600">3</dd><dd class="text-xs text-slate-500">High usage</dd></div><div class="sm:border-l sm:border-slate-200 sm:pl-6"><dt class="text-sm text-slate-500">Resolved</dt><dd class="mt-1 font-display text-3xl font-semibold tabular-nums text-ink">2</dd><dd class="text-xs text-slate-500">Fixed or closed</dd></div>
+    </dl>
+  </section>
+
+  <section class="rounded-xl border border-slate-200 bg-white" aria-labelledby="alerts-title">
+    <div class="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5">
+      <h2 id="alerts-title" class="font-display text-base font-semibold">Alert list</h2>
+      <div class="flex items-center gap-2" role="group" aria-label="Filter alerts by status" data-toggle-group>
+        <button type="button" class="chip" aria-pressed="true" hx-get="partials/alerts-all.html" hx-target="#alerts-list">All</button><button type="button" class="chip" aria-pressed="false" hx-get="partials/alerts-active.html" hx-target="#alerts-list">Active</button><button type="button" class="chip" aria-pressed="false" hx-get="partials/alerts-resolved.html" hx-target="#alerts-list">Resolved</button>
+      </div>
+    </div>
+
+    <!-- Choosing a filter loads a different file here. -->
+    <div id="alerts-list" aria-live="polite" class="border-t border-slate-100" hx-get="partials/alerts-all.html" hx-trigger="load" hx-indicator="this">
+      <div class="p-5">
+        <div class="animate-pulse space-y-4" aria-hidden="true"><div class="h-12 rounded bg-slate-100"></div><div class="h-12 rounded bg-slate-100"></div><div class="h-12 rounded bg-slate-100"></div></div><span class="sr-only">Loading</span>
+      </div>
+    </div>
+  </section>
+</div>

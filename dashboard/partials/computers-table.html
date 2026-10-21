@@ -1,0 +1,106 @@
+<div class="overflow-x-auto">
+  <table class="w-full min-w-[760px] text-left">
+    <caption class="sr-only">Registered computers</caption>
+    <thead>
+      <tr class="text-xs font-medium text-slate-500">
+        <th scope="col" class="px-5 py-3">Computer</th>
+        <th scope="col" class="px-5 py-3">Status</th>
+        <th scope="col" class="px-5 py-3">CPU</th>
+        <th scope="col" class="px-5 py-3">Memory</th>
+        <th scope="col" class="px-5 py-3">Disk</th>
+        <th scope="col" class="px-5 py-3">Last seen</th>
+        <th scope="col" class="py-3 pr-4"><span class="sr-only">Open</span></th>
+      </tr>
+    </thead>
+    <tbody id="computers-body">
+    <tr data-name="PC-01" data-status="online" tabindex="0" role="link" aria-label="Open PC-01 details"
+        hx-get="pages/computer-1.html" hx-target="#content" hx-trigger="click, keyup[key=='Enter']" data-nav="computers"
+        class="cursor-pointer border-t border-slate-100 transition-colors hover:bg-slate-50 focus-visible:bg-slate-50">
+      <td class="px-5 py-3.5">
+        <p class="text-sm font-medium">PC-01</p>
+        <p class="text-xs text-slate-500">Windows 11</p>
+      </td>
+      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Online</span></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:35%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">35%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-amber-500" style="width:60%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">60%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-amber-500" style="width:70%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">70%</span></div></td>
+      <td class="px-5 py-3.5 text-sm text-slate-600">2 minutes ago</td>
+      <td class="py-3.5 pr-4 text-slate-400"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></td>
+    </tr>
+    <tr data-name="PC-02" data-status="online" tabindex="0" role="link" aria-label="Open PC-02 details"
+        hx-get="pages/computer-2.html" hx-target="#content" hx-trigger="click, keyup[key=='Enter']" data-nav="computers"
+        class="cursor-pointer border-t border-slate-100 transition-colors hover:bg-slate-50 focus-visible:bg-slate-50">
+      <td class="px-5 py-3.5">
+        <p class="text-sm font-medium">PC-02</p>
+        <p class="text-xs text-slate-500">Windows 10</p>
+      </td>
+      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Online</span></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-amber-500" style="width:72%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">72%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-amber-500" style="width:65%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">65%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:55%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">55%</span></div></td>
+      <td class="px-5 py-3.5 text-sm text-slate-600">1 minute ago</td>
+      <td class="py-3.5 pr-4 text-slate-400"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></td>
+    </tr>
+    <tr data-name="PC-03" data-status="offline" tabindex="0" role="link" aria-label="Open PC-03 details"
+        hx-get="pages/computer-3.html" hx-target="#content" hx-trigger="click, keyup[key=='Enter']" data-nav="computers"
+        class="cursor-pointer border-t border-slate-100 transition-colors hover:bg-slate-50 focus-visible:bg-slate-50">
+      <td class="px-5 py-3.5">
+        <p class="text-sm font-medium">PC-03</p>
+        <p class="text-xs text-slate-500">Ubuntu 22.04</p>
+      </td>
+      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-2.5 py-1 text-xs font-medium text-rose-700"><span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>Offline</span></td>
+      <td class="px-5 py-3.5"><span class="text-sm text-slate-400">No data</span></td>
+      <td class="px-5 py-3.5"><span class="text-sm text-slate-400">No data</span></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:48%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">48%</span></div></td>
+      <td class="px-5 py-3.5 text-sm text-slate-600">Yesterday, 5:45 PM</td>
+      <td class="py-3.5 pr-4 text-slate-400"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></td>
+    </tr>
+    <tr data-name="PC-04" data-status="online" tabindex="0" role="link" aria-label="Open PC-04 details"
+        hx-get="pages/computer-4.html" hx-target="#content" hx-trigger="click, keyup[key=='Enter']" data-nav="computers"
+        class="cursor-pointer border-t border-slate-100 transition-colors hover:bg-slate-50 focus-visible:bg-slate-50">
+      <td class="px-5 py-3.5">
+        <p class="text-sm font-medium">PC-04</p>
+        <p class="text-xs text-slate-500">Windows 11</p>
+      </td>
+      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Online</span></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:48%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">48%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:52%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">52%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-rose-500" style="width:81%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">81%</span></div></td>
+      <td class="px-5 py-3.5 text-sm text-slate-600">Just now</td>
+      <td class="py-3.5 pr-4 text-slate-400"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></td>
+    </tr>
+    <tr data-name="PC-05" data-status="online" tabindex="0" role="link" aria-label="Open PC-05 details"
+        hx-get="pages/computer-5.html" hx-target="#content" hx-trigger="click, keyup[key=='Enter']" data-nav="computers"
+        class="cursor-pointer border-t border-slate-100 transition-colors hover:bg-slate-50 focus-visible:bg-slate-50">
+      <td class="px-5 py-3.5">
+        <p class="text-sm font-medium">PC-05</p>
+        <p class="text-xs text-slate-500">Windows 10</p>
+      </td>
+      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Online</span></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-rose-500" style="width:88%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">88%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-amber-500" style="width:79%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">79%</span></div></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-amber-500" style="width:63%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">63%</span></div></td>
+      <td class="px-5 py-3.5 text-sm text-slate-600">3 minutes ago</td>
+      <td class="py-3.5 pr-4 text-slate-400"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></td>
+    </tr>
+    <tr data-name="PC-06" data-status="offline" tabindex="0" role="link" aria-label="Open PC-06 details"
+        hx-get="pages/computer-6.html" hx-target="#content" hx-trigger="click, keyup[key=='Enter']" data-nav="computers"
+        class="cursor-pointer border-t border-slate-100 transition-colors hover:bg-slate-50 focus-visible:bg-slate-50">
+      <td class="px-5 py-3.5">
+        <p class="text-sm font-medium">PC-06</p>
+        <p class="text-xs text-slate-500">Ubuntu 22.04</p>
+      </td>
+      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-2.5 py-1 text-xs font-medium text-rose-700"><span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>Offline</span></td>
+      <td class="px-5 py-3.5"><span class="text-sm text-slate-400">No data</span></td>
+      <td class="px-5 py-3.5"><span class="text-sm text-slate-400">No data</span></td>
+      <td class="px-5 py-3.5"><div class="flex items-center gap-2"><div class="h-1.5 w-20 rounded-full bg-slate-100"><div class="h-1.5 rounded-full bg-emerald-500" style="width:40%"></div></div><span class="w-10 text-sm tabular-nums text-slate-600">40%</span></div></td>
+      <td class="px-5 py-3.5 text-sm text-slate-600">2 days ago</td>
+      <td class="py-3.5 pr-4 text-slate-400"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div id="empty-state" class="hidden px-5 py-12 text-center">
+  <p class="font-display text-base font-semibold">No computers match</p>
+  <p class="mt-1 text-sm text-slate-500">Try a different name, or choose All to see every computer.</p>
+</div>

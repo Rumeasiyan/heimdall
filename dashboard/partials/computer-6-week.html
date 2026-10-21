@@ -1,0 +1,23 @@
+<div class="grid gap-6 lg:grid-cols-2">
+  <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="res-title">
+    <h2 id="res-title" class="font-display text-base font-semibold">CPU and memory use</h2>
+    <p class="text-sm text-slate-500">Daily average over the last 7 days.</p>
+    <div class="relative mt-4 h-64">
+      <canvas role="img" aria-label="Line chart of PC-06 CPU and memory use, last week"
+              data-chart="line" data-unit="%" data-max="100"
+              data-labels='["Wed 14","Thu 15","Fri 16","Sat 17","Sun 18","Mon 19","Tue 20"]'
+              data-datasets='[{"label":"CPU","data":[42,39,35,37,33,null,null],"color":"indigo","fill":true},{"label":"Memory","data":[53,55,53,52,51,null,null],"color":"teal"}]'></canvas>
+    </div>
+  </section>
+
+  <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="net-title">
+    <h2 id="net-title" class="font-display text-base font-semibold">Network traffic</h2>
+    <p class="text-sm text-slate-500">Daily average over the last 7 days.</p>
+    <div class="relative mt-4 h-64">
+      <canvas role="img" aria-label="Line chart of PC-06 download and upload traffic, last week"
+              data-chart="line" data-unit=" Mbps"
+              data-labels='["Wed 14","Thu 15","Fri 16","Sat 17","Sun 18","Mon 19","Tue 20"]'
+              data-datasets='[{"label":"Download","data":[14,14,14,11,8,null,null],"color":"sky","fill":true},{"label":"Upload","data":[5,7,9,8,11,null,null],"color":"amber"}]'></canvas>
+    </div>
+  </section>
+</div>

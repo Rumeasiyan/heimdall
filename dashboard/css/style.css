@@ -1,0 +1,81 @@
+/* Small custom styles. Everything else comes from Tailwind classes in the HTML. */
+
+/* Sidebar links */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #b6c0da;
+  transition: background-color 0.15s, color 0.15s;
+}
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+.nav-link.is-active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: inset 3px 0 0 #5eead4;
+}
+
+/* Keyboard focus */
+:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+.sidebar :focus-visible {
+  outline-color: #99f6e4;
+}
+#content:focus {
+  outline: none;
+}
+
+/* The one moving element: the "live data" dot */
+.live-dot {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
+  50%      { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+}
+
+/* Make HTMX's top progress bar fade smoothly */
+.htmx-indicator {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+.htmx-request.htmx-indicator {
+  opacity: 1;
+}
+
+/* Respect "reduce motion" settings */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Status filter chips on the Computers page */
+.chip {
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  background-color: #fff;
+  color: #475569;
+  padding: 0.375rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.15s, color 0.15s;
+}
+.chip:hover {
+  background-color: #f8fafc;
+}
+.chip[aria-pressed="true"] {
+  border-color: #0f1b3d;
+  background-color: #0f1b3d;
+  color: #fff;
+}

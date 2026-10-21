@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in | Heimdall</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 24C3 14 9 7 16 7s13 7 13 17' fill='none' stroke='%234F46E5' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Sora', 'Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            ink: { DEFAULT: '#0F1B3D', 800: '#17254F', 700: '#22336B' },
+            canvas: '#F5F6FA'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js"></script>
+</head>
+
+<body class="h-full bg-canvas font-sans text-ink antialiased">
+  <div class="grid min-h-full lg:grid-cols-2">
+
+    <!-- Brand panel (hidden on small screens) -->
+    <aside class="relative hidden flex-col justify-between overflow-hidden bg-ink p-12 text-slate-300 lg:flex">
+      <div class="flex items-center gap-3">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="bifrost" x1="0" y1="0" x2="32" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F472B6" />
+              <stop offset="0.35" stop-color="#FBBF24" />
+              <stop offset="0.65" stop-color="#34D399" />
+              <stop offset="1" stop-color="#60A5FA" />
+            </linearGradient>
+          </defs>
+          <path d="M3 24C3 14 9 7 16 7s13 7 13 17" stroke="url(#bifrost)" stroke-width="3.5" stroke-linecap="round" />
+          <path d="M3 28h26" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" opacity="0.45" />
+        </svg>
+        <p class="font-display text-xl font-semibold text-white">Heimdall</p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-4xl font-semibold leading-tight text-white">Know which computers are connected, and how they are doing.</h2>
+        <p class="mt-5 max-w-md text-base leading-relaxed text-slate-300">
+          One place to check the status, CPU, memory, disk and network use of every authorized computer on your network.
+        </p>
+      </div>
+
+      <p class="max-w-md text-sm text-slate-400">Only authorized computers are monitored, and only approved system and network metrics are shown.</p>
+    </aside>
+
+    <!-- Sign-in form -->
+    <main class="flex items-center justify-center px-6 py-12 sm:px-10">
+      <div class="w-full max-w-sm">
+        <div class="mb-8 flex items-center gap-3 lg:hidden">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M3 24C3 14 9 7 16 7s13 7 13 17" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" />
+          </svg>
+          <p class="font-display text-lg font-semibold">Heimdall</p>
+        </div>
+
+        <h1 class="font-display text-2xl font-semibold tracking-tight">Sign in</h1>
+        <p class="mt-1 text-sm text-slate-500">This dashboard is for administrators only.</p>
+
+        <form id="login-form" class="mt-8 space-y-5" novalidate>
+          <div>
+            <label for="username" class="block text-sm font-medium">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" autofocus
+                   class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password"
+                   class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+            <label class="mt-2 inline-flex items-center gap-2 text-sm text-slate-600">
+              <input id="show-password" type="checkbox" class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-300" />
+              Show password
+            </label>
+          </div>
+
+          <p id="login-error" role="alert" class="hidden rounded-lg border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-sm text-rose-800"></p>
+
+          <button id="login-btn" type="submit"
+                  class="w-full rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-ink-800 disabled:cursor-not-allowed">
+            Sign in
+          </button>
+        </form>
+
+        <!-- Demo only: remove this box when the real login is connected -->
+        <div class="mt-8 rounded-lg border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-600">
+          <p class="font-medium text-ink">Demo login</p>
+          <p class="mt-1">Username <code class="rounded bg-slate-100 px-1.5 py-0.5 text-xs">admin</code>
+            and password <code class="rounded bg-slate-100 px-1.5 py-0.5 text-xs">admin123</code></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <noscript>
+    <p class="p-6 text-center text-sm">The sign-in page needs JavaScript.</p>
+  </noscript>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
