@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HEIMDALL | Open Government Connectivity Map &amp; Archive</title>
+  <meta name="description" content="Open public monitoring of government connectivity. View real-time connectivity status, historical performance medians, coverage, and anonymised statistics across government offices." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 24C3 14 9 7 16 7s13 7 13 17' fill='none' stroke='%234F46E5' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <!-- Fonts: Sora (headings/numbers) & Figtree (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Sora:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet CSS for Map (FR18) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Sora', 'Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          colors: {
+            ink: { DEFAULT: '#0F172A', 800: '#1E293B', 700: '#334155' },
+            canvas: '#F8FAFC'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/public.css" />
+</head>
+
+<body class="min-h-full bg-canvas font-sans text-ink antialiased flex flex-col">
+
+  <!-- Top Bifrost Gradient Bar -->
+  <div class="h-1.5 w-full bifrost-gradient-border"></div>
+
+  <!-- Header / Navigation (Public - No login required, FR17) -->
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-4">
+
+        <!-- Logo and title -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <svg width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="transition-transform group-hover:scale-105">
+            <defs>
+              <linearGradient id="bifrost-logo" x1="0" y1="0" x2="32" y2="0" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F472B6" />
+                <stop offset="0.35" stop-color="#FBBF24" />
+                <stop offset="0.65" stop-color="#34D399" />
+                <stop offset="1" stop-color="#60A5FA" />
+              </linearGradient>
+            </defs>
+            <path d="M3 24C3 14 9 7 16 7s13 7 13 17" stroke="url(#bifrost-logo)" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M3 28h26" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+          </svg>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-display text-lg font-bold tracking-tight text-slate-900">HEIMDALL</span>
+              <span class="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-600 font-mono">Public Portal</span>
+            </div>
+            <p class="text-xs text-slate-500 hidden sm:block">Open Government Connectivity Monitor &bull; In the manner of Giga</p>
+          </div>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+          <a href="#map-section" class="hover:text-indigo-600 transition">Live Map</a>
+          <a href="#offices-directory" class="hover:text-indigo-600 transition">Offices Directory</a>
+          <a href="#office-inspection-section" class="hover:text-indigo-600 transition">Historical Archive</a>
+          <a href="#open-data-section" class="hover:text-indigo-600 transition">Open Data (FR24)</a>
+          <a href="#privacy-guarantee" class="hover:text-indigo-600 transition">Privacy &amp; Rules</a>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Mission Banner -->
+  <section class="border-b border-slate-200 bg-gradient-to-b from-white to-slate-50 py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200 mb-3">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          Fixture-backed public preview &bull; No account required
+        </div>
+        <h1 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
+          Eastern Province Connectivity Record
+        </h1>
+        <p class="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
+          Explore office status, coverage, and connectivity history across the <strong>Eastern Province (Trincomalee, Batticaloa, and Ampara)</strong>.
+          Performance is presented as <strong>medians with p10 to p90 bands</strong>, never maximums or best moments.
+        </p>
+        <p class="mt-3 text-xs font-semibold text-amber-800" role="status">All readings on this prototype are synthetic fixtures, not live measurements.</p>
+      </div>
+
+      <!-- National Aggregate Statistics (FR6a, FR22, FR23) -->
+      <div id="national-summary-stats">
+        <!-- Rendered by public-portal.js -->
+        <div class="animate-pulse h-24 bg-slate-200 rounded-xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="flex-1 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div id="portal-error" class="hidden rounded-xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-900" role="alert"></div>
+
+    <!-- Interactive Map Section (FR18, FR23) -->
+    <section id="map-section" class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" aria-labelledby="map-heading">
+      <div class="p-5 sm:p-6 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 id="map-heading" class="font-display text-lg font-bold text-slate-900 flex items-center gap-2">
+            Eastern Province Offices Map
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500">Fixture status across Trincomalee, Batticaloa &amp; Ampara</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <!-- District Filter Buttons -->
+          <div class="flex items-center gap-1 p-1 bg-slate-100 rounded-lg text-xs" role="group" aria-label="District Filters">
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-semibold bg-indigo-600 text-white border border-indigo-600 transition" data-district-filter="all">All Eastern</button>
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-medium bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition" data-district-filter="Trincomalee">Trincomalee</button>
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-medium bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition" data-district-filter="Batticaloa">Batticaloa</button>
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-medium bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition" data-district-filter="Ampara">Ampara</button>
+          </div>
+
+          <!-- Status Filter Pill Buttons (FR23: Silent offices explicitly rendered, never omitted) -->
+          <div class="flex items-center gap-1 p-1 bg-slate-100 rounded-lg text-xs" role="group" aria-label="Status Filters">
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-semibold bg-slate-900 text-white border border-slate-900 transition" data-status-filter="all">All Status</button>
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-medium bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition" data-status-filter="online">Online</button>
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-medium bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition" data-status-filter="degraded">Degraded</button>
+            <button type="button" class="px-2.5 py-1.5 rounded-md font-bold bg-white text-purple-900 border border-purple-200 hover:bg-purple-50 transition" data-status-filter="silent">✕ Silent Only (FR23)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Canvas Container -->
+      <div class="relative w-full h-[460px] bg-slate-100">
+        <div id="public-map-container" class="w-full h-full z-10" style="min-height: 460px; height: 100%;" role="application" aria-label="Interactive Map of participating government offices"></div>
+
+        <!-- Floating Map Legend -->
+        <div class="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-xl p-3 border border-slate-200 shadow-lg text-xs space-y-2 pointer-events-auto max-w-xs">
+          <p class="font-semibold text-slate-900 uppercase tracking-wider text-[10px]">Map Legend</p>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-500 border border-white shadow-sm"></span>
+            <span class="text-slate-700">Online &bull; Active reports received</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-amber-500 border border-white shadow-sm"></span>
+            <span class="text-slate-700">Degraded &bull; High latency or drop</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3.5 h-3.5 rounded bg-purple-700 border border-white shadow-sm flex items-center justify-center text-[9px] text-white font-bold">✕</span>
+            <span class="text-purple-950 font-semibold">Explicitly Silent (FR23) &bull; Never hidden</span>
+          </div>
+          <p class="text-[10px] text-slate-400 pt-1 border-t border-slate-100">Click any pin to inspect performance &amp; archive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Office Historical Inspection & Archive (FR19, FR20, FR21, FR22, FR33, SR-H1, SR-H2) -->
+    <section id="office-inspection-section" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6 hidden" aria-labelledby="detail-office-name">
+
+      <!-- Office Header & Permalink Toolbar -->
+      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 pb-6 border-b border-slate-200">
+        <div>
+          <div class="flex items-center gap-3 mb-2 flex-wrap">
+            <span id="detail-office-status" class="px-3 py-1 rounded-full text-xs font-semibold"></span>
+            <span id="detail-office-meta" class="text-xs text-slate-500 font-medium"></span>
+          </div>
+          <h2 id="detail-office-name" class="font-display text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight"></h2>
+        </div>
+
+        <!-- Permalink Widget (FR19: Permalinked URLs) -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col sm:flex-row items-center gap-2 self-start max-w-md w-full">
+          <div class="flex-1 w-full">
+            <label for="permalink-input" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-0.5">Archive Permalink (FR19)</label>
+            <input id="permalink-input" type="text" readonly class="w-full bg-white border border-slate-300 rounded px-2.5 py-1 text-xs text-slate-700 font-mono select-all focus:outline-none" />
+          </div>
+          <button id="copy-permalink-btn" type="button" class="w-full sm:w-auto px-3 py-1.5 bg-slate-900 hover:bg-indigo-600 text-white rounded text-xs font-semibold transition cursor-pointer mt-2 sm:mt-4 whitespace-nowrap">
+            Copy Link
+          </button>
+        </div>
+      </div>
+
+      <!-- Coverage & HEIMDALL Overhead Row (FR6a & FR33) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Coverage Widget (FR6a) -->
+        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500">Office Coverage (FR6a)</h3>
+            <span class="text-xs font-bold text-slate-700">Target: 100% of computers</span>
+          </div>
+          <p id="coverage-numbers" class="font-display text-lg font-bold text-slate-900"></p>
+          <div class="mt-2 w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+            <div id="coverage-bar" class="bg-indigo-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-slate-500 mt-2">Aggregate metrics are most meaningful when all office computers report.</p>
+        </div>
+
+        <!-- HEIMDALL Overhead Meter (FR33) -->
+        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+          <div class="flex items-center justify-between mb-1">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500">HEIMDALL Own Data Use (FR33)</h3>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Negligible Impact</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="heimdall-data-used" class="font-display text-lg font-bold text-slate-900"></span>
+            <span id="heimdall-percent-bw" class="text-xs text-slate-500"></span>
+          </div>
+          <p class="text-xs text-slate-500 mt-2">
+            Average: <strong id="heimdall-daily-avg" class="text-slate-800"></strong>. Published openly to verify HEIMDALL is never the cause of a slow connection.
+          </p>
+        </div>
+      </div>
+
+      <!-- Historical Performance Overview & Time Range Picker (FR19, FR22) -->
+      <div class="space-y-4 pt-4 border-t border-slate-200">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="font-display text-lg font-bold text-slate-900">Typical Performance (Medians with p10–p90 Band)</h3>
+            <p class="text-xs text-slate-500">Enforced by FR22: Never a maximum, never a best moment</p>
+          </div>
+
+          <!-- Date Range Selector (FR19) -->
+          <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg" role="group" aria-label="Archive Range">
+            <button type="button" class="px-3 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200" data-range-btn="24h">Last 24 Hours</button>
+            <button type="button" class="px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-600 text-white" data-range-btn="7d">Last 7 Days</button>
+            <button type="button" class="px-3 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200" data-range-btn="30d">Last 30 Days</button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-end gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+          <div>
+            <label for="archive-from-date" class="mb-1 block text-xs font-semibold text-slate-600">From</label>
+            <input id="archive-from-date" type="date" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label for="archive-to-date" class="mb-1 block text-xs font-semibold text-slate-600">To</label>
+            <input id="archive-to-date" type="date" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm" />
+          </div>
+          <button id="apply-archive-range" type="button" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">Apply dates</button>
+          <p id="archive-range-message" class="basis-full text-xs text-rose-800" role="alert"></p>
+        </div>
+        <p id="archive-data-message" class="hidden rounded-lg bg-amber-50 p-3 text-sm text-amber-900" role="status"></p>
+
+        <!-- Metric KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl border border-sky-100 bg-sky-50/50">
+            <span class="text-xs font-semibold text-sky-800 uppercase tracking-wider block mb-1">Median Download</span>
+            <span id="metric-download-median" class="font-display text-2xl font-bold text-sky-900"></span>
+            <span id="metric-download-band" class="block text-xs text-sky-700 font-mono mt-1"></span>
+          </div>
+
+          <div class="p-4 rounded-xl border border-teal-100 bg-teal-50/50">
+            <span class="text-xs font-semibold text-teal-800 uppercase tracking-wider block mb-1">Median Upload</span>
+            <span id="metric-upload-median" class="font-display text-2xl font-bold text-teal-900"></span>
+            <span id="metric-upload-band" class="block text-xs text-teal-700 font-mono mt-1"></span>
+          </div>
+
+          <div class="p-4 rounded-xl border border-amber-100 bg-amber-50/50">
+            <span class="text-xs font-semibold text-amber-800 uppercase tracking-wider block mb-1">Median RTT Latency</span>
+            <span id="metric-latency-median" class="font-display text-2xl font-bold text-amber-900"></span>
+            <span id="metric-latency-band" class="block text-xs text-amber-700 font-mono mt-1"></span>
+          </div>
+        </div>
+
+        <!-- Timeseries Band Charts (FR22) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+          <div class="p-4 rounded-xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-semibold text-sm text-slate-800">Download Bandwidth (Mbps)</h4>
+              <span class="text-[11px] text-slate-400 font-mono">Solid: Median | Shaded: p10–p90</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="public-bandwidth-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-semibold text-sm text-slate-800">Upload Bandwidth (Mbps)</h4>
+              <span class="text-[11px] text-slate-400 font-mono">Median and p10–p90 band</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="public-upload-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-semibold text-sm text-slate-800">Round-Trip Latency (ms)</h4>
+              <span class="text-[11px] text-slate-400 font-mono">Solid: Median | Shaded: p10–p90</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="public-latency-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-semibold text-sm text-slate-800">Jitter (ms)</h4>
+              <span class="text-[11px] text-slate-400 font-mono">Median and p10–p90 band</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="public-jitter-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-semibold text-sm text-slate-800">Packet Loss (%)</h4>
+              <span class="text-[11px] text-slate-400 font-mono">Median and p10–p90 band</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="public-loss-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-white">
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="font-semibold text-sm text-slate-800">Uptime (%)</h4>
+              <span class="text-[11px] text-slate-400 font-mono">Median and p10–p90 band</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="public-uptime-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Per-Computer Breakdown (FR20, SR-H1, SR-H2) -->
+      <div class="space-y-3 pt-6 border-t border-slate-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-display text-lg font-bold text-slate-900">Per-Computer Disaggregation (FR20)</h3>
+            <p class="text-xs text-slate-500">Anonymised identifiers ("Computer 3"). Never machine names, IPs, MACs, or user IDs.</p>
+          </div>
+          <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">SR-H1 Protected</span>
+        </div>
+
+        <div id="per-computer-table-container">
+          <!-- Filled by public-portal.js, with SR-H1 small office threshold enforcement -->
+        </div>
+      </div>
+
+      <!-- Enrolment History Timeline (FR21) -->
+      <div class="space-y-3 pt-6 border-t border-slate-200">
+        <h3 class="font-display text-lg font-bold text-slate-900">Enrolment Audit Timeline (FR21)</h3>
+        <p class="text-xs text-slate-500">Dated and anonymised record of terminals added, stopped, and removed.</p>
+
+        <div id="enrolment-timeline-container" class="pt-2">
+          <!-- Filled by public-portal.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Offices Directory & Search (FR18, FR19) -->
+    <section id="offices-directory" class="space-y-4" aria-labelledby="directory-heading">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 id="directory-heading" class="font-display text-xl font-bold text-slate-900">Eastern Province Government Offices</h2>
+          <p class="text-xs sm:text-sm text-slate-500">Explore connectivity and telemetry history across Trincomalee, Batticaloa, and Ampara</p>
+        </div>
+
+        <!-- Search input -->
+        <div class="relative max-w-xs w-full">
+          <input id="office-search-input" type="search" placeholder="Search by name, district..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 shadow-sm" />
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+      </div>
+
+      <!-- Office Cards Grid -->
+      <div id="office-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by public-portal.js -->
+      </div>
+    </section>
+
+    <!-- Open Data Download (FR24) -->
+    <section id="open-data-section" class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-2xl p-6 sm:p-8 shadow-md">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div class="max-w-2xl space-y-2">
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-xs font-semibold font-mono border border-indigo-400/30">
+            Open Data (FR24) &bull; ODbL License
+          </div>
+          <h2 class="font-display text-xl sm:text-2xl font-bold tracking-tight">Download Verifiable Public Telemetry</h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Download the public office aggregates in reusable formats. These development exports contain fixtures, not live measurements.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="download-csv-btn" type="button" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-semibold text-xs transition cursor-pointer shadow-sm">
+            <svg class="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download CSV Dataset
+          </button>
+          <button id="download-json-btn" type="button" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition cursor-pointer shadow-sm">
+            <svg class="w-4 h-4 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Download JSON Dataset
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy Guarantees & Acceptance Criteria (SR-H1, SR-H2, SR-G5) -->
+    <section id="privacy-guarantee" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4">
+      <h2 class="font-display text-lg font-bold text-slate-900">HEIMDALL Security &amp; Privacy Architecture</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600">
+        <div class="space-y-1.5 p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <strong class="text-slate-900 block font-semibold text-sm">Read-Only by Construction (SR-G5)</strong>
+          <p>This prototype reads static public fixtures and exposes no write operation. Production must serve the public view read-only on a separate origin from the admin console.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <strong class="text-slate-900 block font-semibold text-sm">Small Office Privacy (SR-H1)</strong>
+          <p>Per-computer rows are omitted from the fixture itself unless an office has at least 3 enrolled and reporting computers.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-xl bg-slate-50 border border-slate-100">
+          <strong class="text-slate-900 block font-semibold text-sm">Stable Random Labels (SR-H2)</strong>
+          <p>Fixture labels are illustrative only. Production labels must be assigned server-side, remain stable, and never reveal install order or device identifiers.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Public Footer -->
+  <footer class="mt-auto border-t border-slate-200 bg-white py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-900 font-display">HEIMDALL</span>
+        <span>&bull; Public Connectivity Monitoring Service</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Fixture-backed archive preview</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Leaflet, Chart.js, PublicBandCharts, PublicMap, PublicPortal -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.js"></script>
+  <script src="js/public-data.js?v=4"></script>
+  <script src="js/public-charts.js?v=4"></script>
+  <script src="js/public-map.js?v=4"></script>
+  <script src="js/public-portal.js?v=4"></script>
+</body>
+</html>

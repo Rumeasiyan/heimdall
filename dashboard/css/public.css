@@ -1,0 +1,76 @@
+/**
+ * Heimdall Public Portal Styles
+ * Inspired by Giga maps: clean, accessible, high visual contrast
+ */
+
+/* Map Pin Styling */
+.custom-office-pin {
+  background: transparent;
+  border: none;
+}
+
+.pin-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+.pin-wrapper:hover {
+  transform: scale(1.25);
+  z-index: 1000 !important;
+}
+
+/* Status Pulse Beacons */
+.status-pulse-emerald {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.4);
+  animation: pulse-emerald 2s infinite ease-out;
+}
+
+@keyframes pulse-emerald {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.status-pulse-amber {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.4);
+  animation: pulse-amber 2s infinite ease-out;
+}
+
+@keyframes pulse-amber {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Distinct SILENT Office (FR23) marker */
+.pin-silent {
+  filter: drop-shadow(0 2px 6px rgba(109, 40, 217, 0.6));
+}
+
+/* Leaflet Popups */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  border: 1px solid #E2E8F0;
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px;
+  line-height: 1.4;
+}
+
+/* Bifrost gradient line */
+.bifrost-gradient-border {
+  background: linear-gradient(90deg, #F472B6 0%, #FBBF24 35%, #34D399 65%, #60A5FA 100%);
+}
