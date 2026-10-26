@@ -1,0 +1,17 @@
+{
+  "name": "heimdall-public-portal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fixture-backed HEIMDALL public map and archive prototype",
+  "scripts": {
+    "dev": "http-server . -p 5173 -c-1",
+    "start": "http-server . -p 5173 -c-1",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
